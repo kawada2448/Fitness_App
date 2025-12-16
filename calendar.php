@@ -4,26 +4,39 @@
 // (PHPロジックは変更なし)
 // ----------------------------------------------------
 
+// タイムゾーン設定 (日本のタイムゾーンを推奨)
+date_default_timezone_set('Asia/Tokyo'); 
+
 $today = time(); 
 $year = date('Y', $today);
 $month = date('m', $today);
 
+// GETパラメータが設定されているかチェック
 if (isset($_GET['year']) && isset($_GET['month'])) {
-    $year = (int)$_GET['year'];
-    $month = (int)$_GET['month'];
+    // 安全のため、整数にキャスト
+    $input_year = (int)$_GET['year'];
+    $input_month = (int)$_GET['month'];
+
+    // 入力値の基本的な検証（例：年を1900年〜2100年、月を1月〜12月に制限）
+    if ($input_year >= 1900 && $input_year <= 2100 && $input_month >= 1 && $input_month <= 12) {
+        $year = $input_year;
+        // 月は2桁表示を維持するため、sprintfを使用
+        $month = sprintf('%02d', $input_month); 
+    }
 }
 
-$target_month_timestamp = strtotime("{$year}-{$month}-01");
+// ターゲットの年月日のタイムスタンプを取得
+$target_month_timestamp = strtotime("{$year}-{$month}-01"); 
 $days_in_month = date('t', $target_month_timestamp);
-$first_day_of_week = date('w', $target_month_timestamp);
+// 0(日曜日)から6(土曜日)の数値を取得
+$first_day_of_week = date('w', $target_month_timestamp); 
 
+// 前月と次月の計算（再利用）
 $prev_month_timestamp = strtotime('-1 month', $target_month_timestamp);
 $next_month_timestamp = strtotime('+1 month', $target_month_timestamp);
-
 $prev_year = date('Y', $prev_month_timestamp);
 $prev_month = date('m', $prev_month_timestamp);
 $days_in_prev_month = date('t', $prev_month_timestamp);
-
 $next_year = date('Y', $next_month_timestamp);
 $next_month = date('m', $next_month_timestamp);
 
@@ -41,8 +54,8 @@ $next_month = date('m', $next_month_timestamp);
         /* **マイルドなグリーン** */
         :root {
             --soft-green: #66cdaa; 
-            --dark-bg: #1e1e1e;    
-            --header-bg: #2b2b2b;  
+            --dark-bg: #1e1e1e;     
+            --header-bg: #2b2b2b;   
             --shadow-intensity: 0 0 8px; 
         }
         
@@ -90,45 +103,88 @@ $next_month = date('m', $next_month_timestamp);
             width: 30px; 
             height: 30px;
             display: block;
-            /* ★調整：初期状態で色を濃く、明るくする */
-            /* brightness を 1.7 に、opacity を 0.9 に上げて視認性を向上 */
             filter: grayscale(100%) brightness(1.7) sepia(100%) hue-rotate(80deg) saturate(200%);
             opacity: 0.9; 
             transition: all 0.3s;
         }
         .settings-btn:hover img {
-            /* ホバー時にさらに少しだけ明るくする（コントラスト維持のため調整）*/
             filter: grayscale(100%) brightness(2.0) sepia(100%) hue-rotate(80deg) saturate(250%);
             opacity: 1.0; 
         }
 
-        /* 月移動ヘッダー（既存 .header のスタイル調整）*/
-        .header { 
+        /* 月移動ヘッダー（フォーム）のスタイル */
+        .calendar-nav-form {
             text-align: center; 
-            font-size: 1.8em; 
+            font-size: 1.2em; 
             margin-bottom: 25px;
             display: flex;
-            justify-content: space-between;
+            /* 修正: 要素を均等に配置 */
+            justify-content: space-between; 
             align-items: center;
-            width: 500px; 
+            width: 500px; /* 幅を再指定してボタンを両端に寄せる */
             padding: 10px 0;
         }
-        .header a {
+        /* 前月/次月ボタンのスタイル (枠を非表示に) */
+        .calendar-nav-form a {
             color: var(--soft-green);
             text-decoration: none;
             padding: 5px 10px;
-            border: 1px solid var(--soft-green);
+            /* 修正: 枠と影を削除 */
+            border: none; 
             border-radius: 5px;
             transition: all 0.3s;
-            box-shadow: 0 0 5px rgba(102, 205, 173, 0.7); 
+            box-shadow: none; 
+            font-size: 1.2em; 
+            font-weight: bold;
+            text-shadow: 0 0 3px var(--soft-green); /* ネオングリーン感を維持 */
         }
-        .header a:hover {
+        .calendar-nav-form a:hover {
+            /* ホバー時に背景と色を反転させ、ボタンらしくする */
             background-color: var(--soft-green);
             color: var(--dark-bg);
             text-shadow: none;
+            box-shadow: 0 0 10px rgba(102, 205, 173, 0.7); /* ホバー時のみ影を適用 */
+        }
+        
+        /* 年月入力フィールドの増減ボタンを非表示にするためのCSS */
+        .calendar-nav-form input[type="number"]::-webkit-inner-spin-button,
+        .calendar-nav-form input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none; 
+            margin: 0;
+        }
+        .calendar-nav-form input[type="number"] {
+            -moz-appearance: textfield; 
         }
 
-        /* カレンダーテーブル */
+        /* 年月入力フィールドのスタイル */
+        .calendar-nav-form input[type="number"] {
+            padding: 8px 10px;
+            font-size: 1.3em;
+            background-color: var(--dark-bg);
+            color: var(--soft-green);
+            border: 2px solid var(--soft-green);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(102, 205, 173, 0.7); 
+            cursor: text;
+            outline: none;
+            margin: 0 5px; 
+            text-align: center;
+            width: 80px; /* 年入力用 */
+        }
+        .calendar-nav-form input[name="month"] {
+            width: 50px; /* 月入力用 */
+        }
+        .calendar-nav-form input[type="number"]:focus {
+             box-shadow: 0 0 8px var(--soft-green); 
+        }
+        .date-input-group {
+            display: flex;
+            align-items: center;
+            font-size: 1.3em; 
+        }
+
+
+        /* カレンダーテーブル (変更なし) */
         .calendar-table { 
             border-collapse: collapse; 
             width: 100%; 
@@ -200,16 +256,41 @@ $next_month = date('m', $next_month_timestamp);
 
     <div class="header-container">
         <a href="#" class="settings-btn">
-            <img src="icon_000020_256.png" alt="設定">
+            <img src="icon_000020_256.png" alt="設定"> 
         </a>
         <span class="app-title">記録</span>
+        <div style="width: 30px;"></div> 
     </div>
 
-    <div class="header">
+    <form action="" method="get" class="calendar-nav-form">
+        
         <a href="?year=<?php echo $prev_year; ?>&month=<?php echo $prev_month; ?>">&lt; 前月</a>
-        <span><?php echo "{$year}年 {$month}月"; ?></span>
+
+        <div class="date-input-group">
+            <input 
+                type="number" 
+                name="year" 
+                value="<?php echo $year; ?>" 
+                min="1900" 
+                max="2100" 
+                required
+                onchange="this.form.submit()" 
+            >年
+            
+            <input 
+                type="number" 
+                name="month" 
+                value="<?php echo (int)$month; ?>" 
+                min="1" 
+                max="12" 
+                required
+                onchange="this.form.submit()"
+            >月
+            
+        </div>
+        
         <a href="?year=<?php echo $next_year; ?>&month=<?php echo $next_month; ?>">次月 &gt;</a>
-    </div>
+    </form>
 
     <table class="calendar-table">
         <thead>
@@ -241,7 +322,7 @@ $next_month = date('m', $next_month_timestamp);
             // 今月の日付を挿入
             for ($day = 1; $day <= $days_in_month; $day++) {
                 
-                $current_date_str = "{$year}-{$month}-{$day}";
+                $current_date_str = "{$year}-{$month}-" . sprintf('%02d', $day);
                 $is_today = (date('Y-m-d', $today) === $current_date_str) ? ' current-day' : '';
                 
                 $day_of_week = ($day_count % 7);
@@ -290,14 +371,24 @@ $next_month = date('m', $next_month_timestamp);
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // 日付セルクリック時の処理
         $('.day-cell').on('click', function() {
             var selectedDate = $(this).data('date');
             window.location.href = 'record_view.php?date=' + selectedDate;
         });
         
+        // 設定ボタンクリック時の処理
         $('.settings-btn').on('click', function(e) {
             e.preventDefault(); 
             alert('設定画面へ遷移します (現在はデモです)');
+        });
+        
+        // エンターキーでフォームを送信する処理
+        $('.calendar-nav-form input[type="number"]').on('keypress', function(e) {
+            if (e.which == 13) { // Enterキー
+                e.preventDefault(); 
+                $(this).closest('form').submit();
+            }
         });
     </script>
 </body>
