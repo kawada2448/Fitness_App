@@ -59,4 +59,9 @@ html {
         color: blue;
         border-bottom: solid 1px blue;
     }
+
+    .create_pass_error {
+        font-size: 30px;
+        color: #f00;
+    }
 }
