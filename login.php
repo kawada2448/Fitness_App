@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>トレーニング記録アプリへ、<br>ログインだ！！！</h1>
+    <h1>aaaaトレーニング記録アプリへ、<br>ログインだ！！！</h1>
     <p class="muscle"><img src="/pro_man 1.png" alt="マッスル！"><img src="/pro_man 1.png" alt="マッスル！"><img src="/pro_man 1.png" alt="マッスル！"></p>
     <form action="" method="post">
         <p>ユーザーID<br>
