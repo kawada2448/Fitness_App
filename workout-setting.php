@@ -13,7 +13,6 @@
         <a href="" class="prev"><img src="images/prev_icon.svg" alt="前へ"></a>
         <h1>ワークアウト設定</h1>
         <a href="" class="settings"><img src="images/settings_icon.svg" alt="設定"></a>
-        <p class="subtitle">Workout Settings</p>
     </header>
     <main>
     </main>
