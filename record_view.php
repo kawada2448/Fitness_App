@@ -52,6 +52,19 @@ if (file_exists($filename)) {
         .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         h1 { color: #1da1f2; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .action-bar { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        /* --- 追加/変更されたCSS --- */
+        .calendar-icon-link {
+            display: inline-flex; /* 画像とテキストが混ざる場合に備え */
+            align-items: center;
+            padding: 5px; /* クリックしやすいようにパディング */
+        }
+        .calendar-icon-link img {
+            width: 30px; /* 画像サイズを調整 */
+            height: 30px;
+            /* 色が青背景と合わない場合は、必要に応じてフィルターを適用 */
+            /* filter: invert(30%) sepia(90%) saturate(1000%) hue-rotate(180deg); */
+        }
+        /* --- /追加/変更されたCSS --- */
         .add-button { 
             padding: 10px 20px; 
             background-color: #1da1f2; 
@@ -73,10 +86,12 @@ if (file_exists($filename)) {
 <body>
 
     <div class="container">
-        <h1>🗓️ <?php echo $display_date; ?> の記録一覧</h1>
+        <h1> <?php echo $display_date; ?> の記録一覧</h1>
 
         <div class="action-bar">
-            <p><a href="calendar.php">カレンダーに戻る</a></p>
+            <a href="calendar.php" class="calendar-icon-link">
+                <img src="calendar.png" alt="カレンダーに戻る"> 
+            </a>
             <a href="record_input.php?date=<?php echo $selected_date; ?>" class="add-button">＋ 記録を追加</a>
         </div>
         
