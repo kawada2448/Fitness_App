@@ -7,7 +7,7 @@
     <title>アカウントを作るんだ！</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/account_form.css">
-    <?php
+    <!-- <?php
         $severname = "localhost";
         $username = "root";
         $password = "";
@@ -27,12 +27,12 @@
             }
             echo "</table>";
         }
-    ?>
+    ?> -->
 </head>
 
 <body>
     <h1>アカウントがない！？<br>ならば、作るのだ！！！</h1>
-    <p class="muscle"><img src="images/pro_man 1.png" alt="マッスル！"><img src="images/pro_man 1.png" alt="マッスル！"><img src="images/pro_man 1.png" alt="マッスル！"></p>
+    <p class="muscle"><img src="pro_man 1.png" alt="マッスル！"><img src="pro_man 1.png" alt="マッスル！"><img src="pro_man 1.png" alt="マッスル！"></p>
     <form action="add_user.php" method="post">
         <p>ユーザーID<br>
             <input type="text" name="name" placeholder="20文字以内で好きな名前を設定してくれ！！！">
