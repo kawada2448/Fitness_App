@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 0 40px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    height: 60px;
+    width: 60px;
+}
+
+main {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.control {
+    margin-bottom: 20px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer_visual {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.timer_count_wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer_count {
+    font-size: 4rem;
+    position: absolute;
+}
+
+.circle {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #c7c7c7;
+    border: 0px solid #333;
+    border-radius: 50%;
+}
+
+.timer_buttons .start-stop {
+    height: 50px;
+    width: 150px;
+    margin: 0 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 50px;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.music {
+    background-color: #fff;
+    height: 200px;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.menu_wrapper {
+    width: 60%;
+}
+
+.current_menu_wrapper,
+.next_menu_wrapper {
+    margin: 0 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.menu {
+    background-color: #fff;
+    margin-left: 30px;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+img {
+    scale: 100%;
+    filter: invert(100%) sepia(100%) saturate(38%) hue-rotate(254deg) brightness(110%) contrast(110%);
+}
+
+iframe {
+    margin-top: 20px;
+    border-radius: 12px;
+}
