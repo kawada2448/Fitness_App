@@ -94,7 +94,7 @@ $items = [
     
     /* トグル時にボタンの色を変えるCSSをオプションで追加 */
     .show-all-button.active {
-        color: #e74c3c; /* 戻ることを示す色（例: 赤系） */
+        color: #e74c3c; 
     }
 
 </style>
@@ -135,10 +135,6 @@ $items = [
 <?php endforeach; ?>
 
 <script>
-/**
- * 種目の表示/非表示をトグルする（3件表示 ⇔ すべて表示）
- * @param {string} id - カテゴリの固有ID
- */
 function toggleListDisplay(id) {
     const rows = document.querySelectorAll('#list-' + id + ' .item-row');
     const button = document.getElementById('button-' + id);
@@ -149,13 +145,11 @@ function toggleListDisplay(id) {
     let fullCount = button.getAttribute('data-full-count');
     
     if (currentState === 'collapsed') {
-        // 状態が「折りたたみ」の場合 → 「すべて表示」に変更
         
         rows.forEach(row => {
             row.style.display = 'flex'; // すべて表示
         });
 
-        // ボタンのテキストと状態を更新
         button.textContent = '3件に戻す';
         button.setAttribute('data-state', 'expanded');
         button.classList.add('active'); // CSSで色を変える
@@ -191,7 +185,6 @@ window.onload = () => {
                     row.style.display = 'none';
                 }
             });
-            // data-state="collapsed"はHTMLで初期設定済み
         } else {
             // 3件以下の場合はボタンを非表示にする
             const categoryId = list.id.replace('list-', '');
