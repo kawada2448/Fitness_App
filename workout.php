@@ -19,7 +19,9 @@
             <div class="timer">
                 <div class="timer_visual">
                     <div class="circle"></div>
-                    <div class="timer_count_wrapper"><p class="timer_count"></p></div>
+                    <div class="timer_count_wrapper">
+                        <p class="timer_count"></p>
+                    </div>
                 </div>
                 <div class="timer_buttons">
                     <button class="start-stop"></button>
@@ -45,6 +47,10 @@
         </div>
     </main>
     <footer>
+        <a href="home.php"><img src="images/home.svg" alt="ホーム"></a>
+        <a href="workout.php" class="active"><img src="images/dumbbell.svg" alt="ワークアウト"></a>
+        <a href="music.php"><img src="images/music.svg" alt="音楽"></a>
+        <a href="setting.php"><img src="images/setting.svg" alt="設定"></a>
     </footer>
     <script>
         // タイマー機能

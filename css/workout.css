@@ -123,3 +123,20 @@ iframe {
     margin-top: 20px;
     border-radius: 12px;
 }
+
+footer {
+    position: fixed;
+    color: #fff;
+    padding: 0 40px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    height: 60px;
+    width: 60px;
+}
